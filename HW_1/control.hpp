@@ -80,23 +80,23 @@ public:
 		d_error = Kce*(e[0]-e[1])/timeStep;
 
 		rule[0] = Fuzzy::strength(error, Fuzzy::NB, d_error, Fuzzy::ZO); out[0] = Fuzzy::NB;
-		rule[1] = Fuzzy::strength(error, Fuzzy::NB, d_error, Fuzzy::PS); out[1] = Fuzzy::NM;
+		rule[1] = Fuzzy::strength(error, Fuzzy::NB, d_error, Fuzzy::PS); out[1] = Fuzzy::NB;
 		rule[2] = Fuzzy::strength(error, Fuzzy::NM, d_error, Fuzzy::ZO); out[2] = Fuzzy::NM;
 		rule[3] = Fuzzy::strength(error, Fuzzy::NS, d_error, Fuzzy::ZO); out[3] = Fuzzy::NS;
-		rule[4] = Fuzzy::strength(error, Fuzzy::NS, d_error, Fuzzy::PS); out[4] = Fuzzy::ZO;
-		rule[5] = Fuzzy::strength(error, Fuzzy::NS, d_error, Fuzzy::PB); out[5] = Fuzzy::PM;
-		rule[6] = Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::NB); out[6] = Fuzzy::NB;
-		rule[7] = Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::NM); out[7] = Fuzzy::NM;
+		rule[4] = Fuzzy::strength(error, Fuzzy::NS, d_error, Fuzzy::PS); out[4] = Fuzzy::PS;
+		rule[5] = Fuzzy::strength(error, Fuzzy::NS, d_error, Fuzzy::PB); out[5] = Fuzzy::PS;
+		rule[6] = Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::NB); out[6] = Fuzzy::NM;
+		rule[7] = Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::NM); out[7] = Fuzzy::NS;
 		rule[8] = Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::NS); out[8] = Fuzzy::NS;
 		rule[9] = Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::ZO); out[9] = Fuzzy::ZO;
 		rule[10]= Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::PS); out[10]= Fuzzy::PS;
-		rule[11]= Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::PM); out[11]= Fuzzy::PM;
-		rule[12]= Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::PB); out[12]= Fuzzy::PB;
-		rule[13]= Fuzzy::strength(error, Fuzzy::PS, d_error, Fuzzy::NB); out[13]= Fuzzy::NM;
-		rule[14]= Fuzzy::strength(error, Fuzzy::PS, d_error, Fuzzy::NS); out[14]= Fuzzy::ZO;
+		rule[11]= Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::PM); out[11]= Fuzzy::PS;
+		rule[12]= Fuzzy::strength(error, Fuzzy::ZO, d_error, Fuzzy::PB); out[12]= Fuzzy::PM;
+		rule[13]= Fuzzy::strength(error, Fuzzy::PS, d_error, Fuzzy::NB); out[13]= Fuzzy::NS;
+		rule[14]= Fuzzy::strength(error, Fuzzy::PS, d_error, Fuzzy::NS); out[14]= Fuzzy::NS;
 		rule[15]= Fuzzy::strength(error, Fuzzy::PS, d_error, Fuzzy::ZO); out[15]= Fuzzy::PS;
 		rule[16]= Fuzzy::strength(error, Fuzzy::PM, d_error, Fuzzy::ZO); out[16]= Fuzzy::PM;
-		rule[17]= Fuzzy::strength(error, Fuzzy::PB, d_error, Fuzzy::NS); out[17]= Fuzzy::PM;
+		rule[17]= Fuzzy::strength(error, Fuzzy::PB, d_error, Fuzzy::NS); out[17]= Fuzzy::PB;
 		rule[18]= Fuzzy::strength(error, Fuzzy::PB, d_error, Fuzzy::ZO); out[18]= Fuzzy::PB;
 
 		m[0]=Ku*Fuzzy::defuzzy(rule, out, method);

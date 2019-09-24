@@ -64,7 +64,7 @@ double defuzzy(std::vector<double>& rule, std::vector<std::vector<double>>& out,
 		tmp2=0.0;
 
 		for (int i=0; i<member.size(); i++) {
-			tmp1 += member[i]*(-1.0+2.0*i/member.size()-1.0);
+			tmp1 += member[i]*(-1.0+2.0*i/(member.size()-1.0));
 			tmp2 += member[i];
 		}
 
