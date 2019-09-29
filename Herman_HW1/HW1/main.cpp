@@ -54,7 +54,7 @@ int main()
 
 
 	// For fuzzy-controller
-	double Ke = 1.15, Kce = 0.95, Ku = 1.9;  // Ke and Ku make faster and more aggressive output. Kce make it more robust
+	double Ke = 1.15, Kce = 0.94, Ku = 1.9;  // Ke and Ku make faster and more aggressive output. Kce make it more robust
 
 	std::fstream flc_setting("matlab/flc_settings.txt", std::ios::out);
 	flc_setting << "Ke, Kce, Ku" << std::endl;
