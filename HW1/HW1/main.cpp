@@ -50,11 +50,10 @@ int main()
 	controllersCtrl << "P;PID;FLC;FLC3" << std::endl;
 
 	// For P- and PID-controller
-	double Kp = 1.2, Ki = 0.000024, Kd = 1.9;
-
+	double Kp = 1.18, Ki = 0.000024, Kd = 1.9;
 
 	// For fuzzy-controller
-	double Ke = 1.15, Kce = 0.94, Ku = 1.9;  // Ke and Ku make faster and more aggressive output. Kce make it more robust
+	double Ke = 1.15, Kce = 0.94, Ku = 1.9;
 
 	std::fstream flc_setting("matlab/flc_settings.txt", std::ios::out);
 	flc_setting << "Ke, Kce, Ku" << std::endl;
@@ -110,6 +109,8 @@ int main()
 	controllersOut.close();
 
 	process_output_data();
+
+	// The code to print out the response characteristics was written with help from Herman Kolstad
 
 	//std::cout << "P-controller" << std::endl;
 	//print_response_characteristics(pOut, STEPVALUE, PCT_ST_THRESHOLD, ST_THRESHOLD, RT_THRESHOLD, PO_THERSHOLD);

@@ -7,13 +7,26 @@ namespace Fuzzy {
 typedef std::vector<double> Rule;
 typedef std::vector<std::vector<double>> Out;
 
-std::vector<double> NB = {-INF,   -1,   -2/3.};
+// Increased NB and PB
+std::vector<double> NB = {-INF,   -2,   -2/3.};
 std::vector<double> NM = {-1,   -2/3., -1/3.};
 std::vector<double> NS = {-2/3., -1/3.,  0};
 std::vector<double> ZO = {-1/3.,  0,    1/3.};
 std::vector<double> PS = { 0,    1/3.,  2/3.};
 std::vector<double> PM = { 1/3.,  2/3.,  1};
-std::vector<double> PB = { 2/3.,  1,    INF};
+std::vector<double> PB = { 2/3.,  2,    INF};
+
+
+void write_MF_to_file(std::fstream &file, std::vector<double> &mf, std::string mfName){
+    file << mfName <<";";
+    for (int i = 0; i < mf.size(); i++){
+        file << mf[i];
+        if (i < mf.size() - 1){
+				file << ";";
+			}
+    }
+    file << std::endl;
+}
 
 double membership(double x, std::vector<double>& A) {
 	double a, b; // y = ax+b
@@ -64,7 +77,7 @@ double defuzzy(std::vector<double>& rule, std::vector<std::vector<double>>& out,
 		tmp2=0.0;
 
 		for (int i=0; i<member.size(); i++) {
-			tmp1 += member[i]*(-1.0+2.0*i/(member.size()-1.0));
+			tmp1 += member[i]*(-1.0+2.0*i/member.size()-1.0);
 			tmp2 += member[i];
 		}
 
