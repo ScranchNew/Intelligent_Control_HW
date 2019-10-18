@@ -8,35 +8,49 @@
 
 #include "fuzzy.hpp"
 #include "control.hpp"
-#include "spec.hpp"
 
 int main()
 {
 
 	double timeStep=0.05;
-	Control control(4, timeStep);
+	std::vector<Control> controlers = {Control(4, timeStep),
+										Control(4, timeStep), 
+										Control(4, timeStep), 
+										Control(4, timeStep), 
+										Control(4, timeStep), 
+										Control(4, timeStep)};
+
 	std::vector<double> a = {1.0, -2.856 , 2.717, -0.861};
 	std::vector<double> b = {0.0, 0.0, 2.3136e-4, 9.28e-7};
 
 	//////////////////////////////////////////////////////
-	// Use plausibility measure xi=0.75, belief measure xi=0.25, respectively. 
-	Fuzzy::xi = 0.8;
-// 	Fuzzy::preference = {1,10,5};
-//	Fuzzy::preference = {5,1,10};
-	Fuzzy::preference = {10,5,1};
+	// Use plausibility measure xi=0.9, belief measure xi=0.1, respectively.
+
+	std::vector<double> xi_s = {0.9, 0.1};
+	std::vector<std::vector<double>> preference_s = {{1,10,2},
+													 {2,1,10},
+													 {10,2,1}};
+
+	Fuzzy::xi = 0.1;
+// 	Fuzzy::preference = {1,10,2};
+//	Fuzzy::preference = {2,1,10};
+//	Fuzzy::preference = {10,2,1};
 	//////////////////////////////////////////////////////
 	
-	control.setA(a);
-	control.setB(b);
+	for (size_t i = 0; i < 6; i++)
+	{
+		controlers[i].setA(a);
+		controlers[i].setB(b);
+	}
 
 	std::fstream fileout("matlab/flc.txt", std::ios::out);
-	fileout << "FLC" << std::endl;
+	fileout << "Plaus_1; Plaus_2; Plaus_3; Belief_1; Belief_2; Belief_3" << std::endl;
 	
 	std::fstream controllersErr("matlab/err.txt", std::ios::out);
-	controllersErr << "FLC" << std::endl;
+	controllersErr << "Plaus_1; Plaus_2; Plaus_3; Belief_1; Belief_2; Belief_3" << std::endl;
 
 	std::fstream controllersCtrl("matlab/ctrl.txt", std::ios::out);
-	controllersCtrl << "FLC" << std::endl;
+	controllersCtrl << "Plaus_1; Plaus_2; Plaus_3; Belief_1; Belief_2; Belief_3" << std::endl;
 
 	//////////////////////////////////////////////////////
 	// Use the parameters you used in HW#1.
@@ -45,31 +59,42 @@ int main()
 
 	double yout = 0.0;
 	double target = 1.0;
-	control.setTarget(target);
+
+	for (size_t i = 0; i < 6; i++)
+	{
+		controlers[i].setTarget(target);
+	}
 
 	int maxTimeStep = 500;
 	for (int t=0; t<maxTimeStep; t++) {
 
-		control.FLC(Ke, Kce, Ku);
+		for (size_t i = 0; i < 6; i++)
+		{
+			Fuzzy::xi = xi_s[ i > 2 ? 1 : 0 ];
+			Fuzzy::preference = preference_s[i%3];
 
-		controllersErr << control.getErr()<< std::endl;
-		controllersCtrl << control.getCtrl()<< std::endl;
+			controlers[i].FLC(Ke, Kce, Ku);
 
-		yout = control.motor();
-		control.delay(yout);
 
-		//std::cout << yout << std::endl;
-		fileout << yout << std::endl;
+			yout = controlers[i].motor();
+			controlers[i].delay(yout);
+
+			controllersErr << controlers[i].getErr()<< "; ";
+			controllersCtrl << controlers[i].getCtrl()<< "; ";
+			fileout << yout << "; ";
+
+			if (i > 4) {
+				controllersErr <<  std::endl;
+				controllersCtrl <<  std::endl;
+				fileout <<  std::endl;
+			}
+			//std::cout << yout << std::endl;
+		}
+
 	}
 
 	fileout.close();
 	controllersErr.close();
 	controllersCtrl.close();
-
-	process_output_data();
-	
-	std::cout << "FLC-controller" << std::endl;
-	print_response_characteristics(flcOut, STEPVALUE, PCT_ST_THRESHOLD, ST_THRESHOLD, RT_THRESHOLD, PO_THERSHOLD);
-
 	return 0;
 }

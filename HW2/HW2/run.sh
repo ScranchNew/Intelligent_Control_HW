@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile & run
-g++ -std=c++11 spec.cpp main.cpp -o main.o
+g++ -std=c++11 main.cpp -o main.o
 ./main.o
 
 # Plotting
