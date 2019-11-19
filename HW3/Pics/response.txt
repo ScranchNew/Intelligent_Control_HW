@@ -1,0 +1,31 @@
+No noise
+/%OS: 0.61
+Rise Time: 64.4409
+Settling Time: 130.3101
+/%OS: 3.317
+Rise Time: 62.9494
+Settling Time: 120.1983
+
+5e-5 noise
+/%OS: 2.118
+Rise Time: 61.854
+Settling Time: 435.4436
+/%OS: 3.261
+Rise Time: 60.1941
+Settling Time: 115.1635
+
+5e-4 noise
+/%OS: 11.047
+Rise Time: 63.6594
+Settling Time: NaN
+/%OS: 19.122
+Rise Time: 107.4638
+Settling Time: NaN
+
+1e-4 noise
+/%OS: 2.929
+Rise Time: 63.6384
+Settling Time: NaN
+/%OS: 11.664
+Rise Time: 56.3601
+Settling Time: 314.1402

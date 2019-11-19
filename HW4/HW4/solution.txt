@@ -1,0 +1,9 @@
+Best member of 1-th run : 
+101111011001101101101111100000111000 =>    0.992886600    0.985714698  
+ Best fitness = 0.000051791  for 489 generation
+
+Average Generation for Obtaining OPTIMAL Solution = 489.000000
+Best solution = -29.999948209, Worst solution = -29.999948209
+Least generation = 489    , Most generation = 489
+Number of 2000 generation = 0
+ 
